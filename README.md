@@ -134,6 +134,16 @@ To enable this configuration use the `extends` property in your `.eslintrc` conf
 }
 ```
 
+For ESLint flat config (`eslint.config.js`), use:
+
+```js
+import ftFlow from 'eslint-plugin-ft-flow';
+
+export default [
+  ftFlow.flatConfigs.recommended,
+];
+```
+
 <a name="babel-parser"></a>
 #### Babel parser
 
@@ -142,6 +152,8 @@ Alternatively, if you can't yet use `hermes-eslint`, prior to version 3.0.0 ft-f
 Though it's recommended to switch to the recommended extension when possible as `babel-parser` may be removed in a future version.
 
 > By default this config also comes preloaded with `@babel/eslint-parser` which means for eslint to analyze your flow code it relies your babel config (`babel.config.js`, `.babelrc`, `.babelrc.js`). You should already have this setup as part of running/testing your code but if you don't you can learn more [here](https://flow.org/en/docs/tools/babel/)
+
+For ESLint flat config (`eslint.config.js`), this config is not available.
 
 ---
 
