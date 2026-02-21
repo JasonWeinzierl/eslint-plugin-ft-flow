@@ -1666,8 +1666,6 @@ const text = 'HELLO';
 /**
  * $FlowIgnore[incompatible-call] TODO 48
  */
-
-/* $FlowIgnore[incompatible-call] TODO 48 */
 ```
 
 
@@ -1986,8 +1984,6 @@ type f = { get(key: ["a", 1]): string, get(key: ["a", 2]): string }
 type f = { get(key: ["a", ["b", 1]]): string, get(key: ["a", ["b", 2]]): string }
 
 type f = { a: number, b: string, c: number }
-
-type f = { get(key: "a"): string, get(key: "b"): string }
 
 type f = { get(key: "a"): string, get(key: "a", key2: "b"): string }
 
@@ -3074,10 +3070,6 @@ declare class Foo { a: Foo; }
 declare class Foo { [a: string]: Foo, }
 // Message: Prefer semicolons to commas in object and class types
 
-// Options: ["comma"]
-declare class Foo { a: Foo; }
-// Message: Prefer commas to semicolons in object and class types
-
 // Options: ["semicolon"]
 declare class Foo { (): Foo, }
 // Message: Prefer semicolons to commas in object and class types
@@ -3274,9 +3266,6 @@ const foo: { n: number } & { s: string } = { n: 0, s: "" };
 
 type Foo = { bar: { n: number } & { s: string } };
 // Message: All intersection types must be declared with named type alias.
-
-function foo(bar: { n: number } & { s: string }) {}
-// Message: All intersection types must be declared with named type alias.
 ```
 
 The following patterns are not considered problems:
@@ -3450,14 +3439,6 @@ type foo = Array<{bar: string}>;
 
 // Options: ["never"]
 type foo = number;
-
-// Options: ["always"]
-interface StackFrame {
-          colno?: number;
-          lineno?: number;
-          filename?: string;
-          function?: {| name: string |};
-      }
 
 type A = { a: string, ... }
 ```
@@ -3756,9 +3737,6 @@ const f: fn = (a, b) => {}
 
 // Options: [{"excludeParameterMatch":"^_"}]
 (_foo: number, bar: string) => {}
-
-// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
-(foo) => {}
 ```
 
 
@@ -4458,9 +4436,6 @@ const foo = 3;
 export opaque type Foo = number;
 const foo = 3;
 
-type Foo = number;
-const foo = 3;
-
 import bar from "./bar";
 type Foo = number;
 
@@ -4557,17 +4532,9 @@ a;
 // @nofloweeeeeee
 // Message: Misspelled or malformed Flow file annotation.
 
-// Options: ["always"]
-a;
-// Message: Flow file annotation is missing.
-
 // Options: ["always",{"annotationStyle":"line"}]
 /* @flow */
 // Message: Flow file annotation style must be `// @flow`
-
-// Options: ["always",{"annotationStyle":"block"}]
-// @flow
-// Message: Flow file annotation style must be `/* @flow */`
 
 // Options: ["always",{"annotationStyle":"block"}]
 // @flow
@@ -4885,9 +4852,6 @@ type FooType = { a: number, C: number, c: number, b: string }
 // Options: ["asc"]
 type FooType = { 1: number, 10: number, 2: boolean }
 // Message: Expected type annotations to be in ascending order. "2" must be before "10".
-
-type FooType = { a: number, c: number, b: string }
-// Message: Expected type annotations to be in ascending order. "b" must be before "c".
 
 
         type FooType = {
