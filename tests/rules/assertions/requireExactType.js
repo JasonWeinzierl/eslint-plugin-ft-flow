@@ -217,22 +217,6 @@ export default {
       options: ['never'],
     },
 
-    {
-      code: `interface StackFrame {
-          colno?: number;
-          lineno?: number;
-          filename?: string;
-          function?: {| name: string |};
-      }`,
-      options: ['always'],
-      output: `interface StackFrame {
-          colno?: number;
-          lineno?: number;
-          filename?: string;
-          function?: {| name: string |};
-      }`,
-    },
-
     // Explicit inexact
 
     {
