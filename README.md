@@ -24,7 +24,8 @@
 ---
 
 * [Installation](#installation)
-* [Configuration](#configuration)
+* [Configuration (Flat Config)](#configuration-(flat config))
+* [Configuration (eslintrc)](#configuration-(eslintrc))
   * [Shareable configurations](#shareable-configurations)
 * [Settings](#settings)
   * [`onlyFilesWithFlowAnnotation`](#onlyfileswithflowannotation)
@@ -33,7 +34,6 @@
   * [`array-style-simple-type`](#array-style-simple-type)
   * [`arrow-parens`](#arrow-parens)
   * [`boolean-style`](#boolean-style)
-  * [`define-flow-type`](#define-flow-type)
   * [`delimiter-dangle`](#delimiter-dangle)
   * [`enforce-line-break`](#enforce-line-break)
   * [`enforce-suppression-code`](#enforce-suppression-code)
@@ -75,7 +75,6 @@
   * [`type-id-match`](#type-id-match)
   * [`type-import-style`](#type-import-style)
   * [`union-intersection-spacing`](#union-intersection-spacing)
-  * [`use-flow-type`](#use-flow-type)
   * [`use-read-only-spread`](#use-read-only-spread)
   * [`valid-syntax`](#valid-syntax)
 
@@ -93,8 +92,40 @@ yarn add -D eslint-plugin-ft-flow eslint hermes-eslint
 pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 ```
 
-<a name="configuration"></a>
-## Configuration
+<a name="configuration-(flat-config)"></a>
+## Configuration (Flat Config)
+
+1. Set `languageOptions.parser` to `hermesESLintParser`.
+2. Add `plugins` section and specify `ft-flow` as a plugin.
+3. Enable rules.
+
+<!-- -->
+
+```js
+import hermesESLintParser from 'hermes-eslint';
+import ftFlow from 'eslint-plugin-ft-flow';
+
+export default [{
+  plugins: {
+    'ft-flow': ftFlow,
+  },
+  languageOptions: {
+    parser: hermesESLintParser,
+  },
+  settings: {
+    'ft-flow': {
+      onlyFilesWithFlowAnnotation: false,
+    },
+  },
+  rules: {
+    'ft-flow/boolean-style': ['error', 'boolean'],
+    // ... more rules
+  },
+}];
+```
+
+<a name="configuration-(eslintrc)"></a>
+## Configuration (eslintrc)
 
 1. Set `parser` property to `hermes-eslint`.
 2. Add `plugins` section and specify `ft-flow` as a plugin.
@@ -126,34 +157,26 @@ pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 
 This plugin exports a [recommended configuration](./src/configs/recommended.json) that enforces Flowtype best practices.
 
-To enable this configuration use the `extends` property in your `.eslintrc` config file in place of the above suggested properties:
+To enable this configuration in the ESLint flat config (`eslint.config.js`), use:
+
+```diff
+import { defineConfig } from 'eslint/config';
++import ftFlow from 'eslint-plugin-ft-flow';
+
+export default defineConfig({
+  extends: [
++   ftFlow.flatConfigs.recommended,
+  ],
+});
+```
+
+To enable this configuration in your `.eslintrc`, use the `extends` property in your config file (instead of the previous suggested configuration):
 
 ```json
 {
   "extends": ["plugin:ft-flow/recommended"]
 }
 ```
-
-For ESLint flat config (`eslint.config.js`), use:
-
-```js
-import ftFlow from 'eslint-plugin-ft-flow';
-
-export default [
-  ftFlow.flatConfigs.recommended,
-];
-```
-
-<a name="babel-parser"></a>
-#### Babel parser
-
-Alternatively, if you can't yet use `hermes-eslint`, prior to version 3.0.0 ft-flow shipped a recommended config that used `@babel/eslint-parser` which is still available under the `"plugin:ft-flow/babel-parser"` extension.
-
-Though it's recommended to switch to the recommended extension when possible as `babel-parser` may be removed in a future version.
-
-> By default this config also comes preloaded with `@babel/eslint-parser` which means for eslint to analyze your flow code it relies your babel config (`babel.config.js`, `.babelrc`, `.babelrc.js`). You should already have this setup as part of running/testing your code but if you don't you can learn more [here](https://flow.org/en/docs/tools/babel/)
-
-For ESLint flat config (`eslint.config.js`), this config is not available.
 
 ---
 
@@ -634,171 +657,6 @@ type X = bool
 // Options: ["boolean"]
 // Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 type X = bool
-```
-
-
-
-<a name="define-flow-type"></a>
-### `define-flow-type`
-
-> @deprecated rule that is no longer needed with the current recommended config but kept around in case people want to continue using it with `@babel/eslint-parser` such as the `babel-parser` extension.
-
-Marks Flow type identifiers as defined.
-
-Used to suppress [`no-undef`](http://eslint.org/docs/rules/no-undef) reporting of type identifiers.
-
-The following patterns are not considered problems:
-
-```js
-var a: AType
-// Additional rules: {"no-undef":2}
-
-var a: AType; var b: AType
-// Additional rules: {"no-undef":2}
-
-var a; (a: AType)
-// Additional rules: {"no-undef":2}
-
-var a: AType<BType>
-// Additional rules: {"no-undef":2}
-
-type A = AType
-// Additional rules: {"no-undef":2}
-
-declare type A = number
-// Additional rules: {"no-undef":2}
-
-opaque type A = AType
-// Additional rules: {"no-undef":2}
-
-function f(a: AType) {}
-// Additional rules: {"no-undef":2}
-
-function f(a: AType.a) {}
-// Additional rules: {"no-undef":2}
-
-function f(a: AType.a.b) {}
-// Additional rules: {"no-undef":2}
-
-function f(a): AType {}; var a: AType
-// Additional rules: {"no-undef":2}
-
-function f(a): AType {}
-// Additional rules: {"no-undef":2}
-
-class C { a: AType }
-// Additional rules: {"no-undef":2}
-
-class C { a: AType.a }
-// Additional rules: {"no-undef":2}
-
-class C { a: AType.a.b }
-// Additional rules: {"no-undef":2}
-
-class C implements AType {}
-// Additional rules: {"no-undef":2}
-
-declare interface A {}
-// Additional rules: {"no-undef":2}
-
-({ a: ({b() {}}: AType) })
-// Additional rules: {"no-undef":2}
-
-type X = {Y<AType>(): BType}
-// Additional rules: {"no-undef":2}
-
-// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
-
-/**
-* Copyright 2019 no corp
-* @flow
-*/
-type Foo = $ReadOnly<{}>
-// Additional rules: {"no-undef":2}
-
-enum Status { Active, Paused }
-// Additional rules: {"no-undef":2}
-
-enum Status { Active = 'active', Paused = 'paused' }
-// Additional rules: {"no-undef":2}
-
-enum Status { Active = 1, Paused = 2 }
-// Additional rules: {"no-undef":2}
-
-var a: AType
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-var a: AType; var b: AType
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-var a; (a: AType)
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-var a: AType<BType>
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-type A = AType
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-declare type A = number
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-opaque type A = AType
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-function f(a: AType) {}
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-function f(a: AType.a) {}
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-function f(a: AType.a.b) {}
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-function f(a): AType {}; var a: AType
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-function f(a): AType {}
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-class C { a: AType }
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-class C { a: AType.a }
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-class C { a: AType.a.b }
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-class C implements AType {}
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-declare interface A {}
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-({ a: ({b() {}}: AType) })
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-type X = {Y<AType>(): BType}
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
-
-/**
-* Copyright 2019 no corp
-* @flow
-*/
-type Foo = $ReadOnly<{}>
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-enum Status { Active, Paused }
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-enum Status { Active = 'active', Paused = 'paused' }
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
-
-enum Status { Active = 1, Paused = 2 }
-// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
 ```
 
 
@@ -2007,6 +1865,14 @@ import Foo from './foo';
 
 
 // Message: Expected no newline after flow annotation
+
+/*
+* @flow
+*
+* something multi lined
+*/
+const text: string = 42;
+// Message: Expected newline after flow annotation
 ```
 
 The following patterns are not considered problems:
@@ -2025,6 +1891,15 @@ import Foo from './foo';
 // Options: ["never"]
 // @flow
 import Foo from './foo';
+
+// Options: ["always"]
+/*
+* @flow
+*
+* something multi lined
+*/
+
+const text: string = 42;
 ```
 
 
@@ -2351,6 +2226,35 @@ const text: string = 42;
 // @flow strict
 
 // $FlowExpectedError[xxx]
+const text: string = 42;
+// Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
+
+// Options: [{}]
+/* @flow strict */
+
+// $FlowExpectedError[xxx]
+const text: string = 42;
+// Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
+
+// Options: [{}]
+/*
+* @flow strict
+*
+* something multi lined
+*/
+
+// $FlowExpectedError[xxx]
+const text: string = 42;
+// Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
+
+// Options: [{}]
+/*
+* @flow strict
+*
+* something multi lined
+*/
+
+/* $FlowIgnore[xxx] */
 const text: string = 42;
 // Message: No suppression comments are allowed in "strict" Flow files. Either remove the error suppression, or lower the strictness of this module.
 
@@ -3981,6 +3885,17 @@ The following patterns are considered problems:
 type Props = { }; class Foo extends React.Component<Props> { }
 // Message: Props must be $ReadOnly
 
+// Options: [{"useExperimentalTypeScriptSyntax":true}]
+type Props = { }; class Foo extends React.Component<Props> { }
+// Message: Props must be Readonly
+
+// Options: [{"useExperimentalTypeScriptSyntax":false}]
+type Props = Readonly<{ }>; class Foo extends React.Component<Props> { }
+// Message: Props must be $ReadOnly
+
+type Props = Readonly<{ }>; class Foo extends React.Component<Props> { }
+// Message: Props must be $ReadOnly
+
 type OtherProps = { foo: string }; class Foo extends React.Component<OtherProps> { }
 // Message: OtherProps must be $ReadOnly
 
@@ -4018,6 +3933,17 @@ type Props = {| +foo: string, -bar: number |}; class Foo extends Component<Props
 type Props = { }; function Foo(props: Props) { return <p /> }
 // Message: Props must be $ReadOnly
 
+// Options: [{"useExperimentalTypeScriptSyntax":true}]
+type Props = { }; function Foo(props: Props) { return <p /> }
+// Message: Props must be Readonly
+
+// Options: [{"useExperimentalTypeScriptSyntax":false}]
+type Props = Readonly<{ }>; function Foo(props: Props) { return <p /> }
+// Message: Props must be $ReadOnly
+
+type Props = Readonly<{ }>; function Foo(props: Props) { return <p /> }
+// Message: Props must be $ReadOnly
+
 type Props = { }; function Foo(props: Props) { return foo ? <p /> : <span /> }
 // Message: Props must be $ReadOnly
 
@@ -4032,6 +3958,9 @@ The following patterns are not considered problems:
 
 ```js
 class Foo extends React.Component<$ReadOnly<{}>> { }
+
+// Options: [{"useExperimentalTypeScriptSyntax":true}]
+class Foo extends React.Component<Readonly<{}>> { }
 
 type Props = $ReadOnly<{}>; class Foo extends React.Component<Props> { }
 
@@ -4087,6 +4016,9 @@ import { type Props } from "file"; class Foo extends React.Component<Props> { }
 type Props = {}; function Foo() { }
 
 type Props = $ReadOnly<{}>; function Foo(props: Props) { }
+
+// Options: [{"useExperimentalTypeScriptSyntax":true}]
+type Props = Readonly<{}>; function Foo(props: Props) { }
 
 type Props = {}; function Foo(props: OtherProps) { }
 
@@ -7118,42 +7050,6 @@ type X =
 
 // Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 type X = string& number;
-```
-
-
-
-<a name="use-flow-type"></a>
-### `use-flow-type`
-
-> @deprecated rule that is no longer needed with the current recommended config but kept around in case people want to continue using it with `@babel/eslint-parser` such as the `babel-parser` extension.
-
-Marks Flow [type alias](https://flowtype.org/docs/type-aliases.html) declarations as used.
-
-Used to suppress [`no-unused-vars`](http://eslint.org/docs/rules/no-unused-vars) errors that are triggered by type aliases.
-
-The following patterns are not considered problems:
-
-```js
-declare class A {}
-// Additional rules: {"no-unused-vars":1}
-
-declare function A(): Y
-// Additional rules: {"no-unused-vars":1}
-
-declare module A {}
-// Additional rules: {"no-unused-vars":1}
-
-declare module A { declare var a: Y }
-// Additional rules: {"no-unused-vars":1}
-
-declare var A: Y
-// Additional rules: {"no-unused-vars":1}
-
-import type A from "a"; type X<B = ComponentType<A>> = { b: B }; let x: X; console.log(x);
-// Additional rules: {"no-unused-vars":1}
-
-import type A from "a"; type X<B = A<string>> = { b: B }; let x: X; console.log(x);
-// Additional rules: {"no-unused-vars":1}
 ```
 
 

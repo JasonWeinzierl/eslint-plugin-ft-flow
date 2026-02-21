@@ -37,7 +37,38 @@ yarn add -D eslint-plugin-ft-flow eslint hermes-eslint
 pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 ```
 
-## Configuration
+## Configuration (Flat Config)
+
+1. Set `languageOptions.parser` to `hermesESLintParser`.
+2. Add `plugins` section and specify `ft-flow` as a plugin.
+3. Enable rules.
+
+<!-- -->
+
+```js
+import hermesESLintParser from 'hermes-eslint';
+import ftFlow from 'eslint-plugin-ft-flow';
+
+export default [{
+  plugins: {
+    'ft-flow': ftFlow,
+  },
+  languageOptions: {
+    parser: hermesESLintParser,
+  },
+  settings: {
+    'ft-flow': {
+      onlyFilesWithFlowAnnotation: false,
+    },
+  },
+  rules: {
+    'ft-flow/boolean-style': ['error', 'boolean'],
+    // ... more rules
+  },
+}];
+```
+
+## Configuration (eslintrc)
 
 1. Set `parser` property to `hermes-eslint`.
 2. Add `plugins` section and specify `ft-flow` as a plugin.
@@ -67,33 +98,26 @@ pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 
 This plugin exports a [recommended configuration](./src/configs/recommended.json) that enforces Flowtype best practices.
 
-To enable this configuration use the `extends` property in your `.eslintrc` config file in place of the above suggested properties:
+To enable this configuration in the ESLint flat config (`eslint.config.js`), use:
+
+```diff
+import { defineConfig } from 'eslint/config';
++import ftFlow from 'eslint-plugin-ft-flow';
+
+export default defineConfig({
+  extends: [
++   ftFlow.flatConfigs.recommended,
+  ],
+});
+```
+
+To enable this configuration in your `.eslintrc`, use the `extends` property in your config file (instead of the previous suggested configuration):
 
 ```json
 {
   "extends": ["plugin:ft-flow/recommended"]
 }
 ```
-
-For ESLint flat config (`eslint.config.js`), use:
-
-```js
-import ftFlow from 'eslint-plugin-ft-flow';
-
-export default [
-  ftFlow.flatConfigs.recommended,
-];
-```
-
-#### Babel parser
-
-Alternatively, if you can't yet use `hermes-eslint`, prior to version 3.0.0 ft-flow shipped a recommended config that used `@babel/eslint-parser` which is still available under the `"plugin:ft-flow/babel-parser"` extension.
-
-Though it's recommended to switch to the recommended extension when possible as `babel-parser` may be removed in a future version.
-
-> By default this config also comes preloaded with `@babel/eslint-parser` which means for eslint to analyze your flow code it relies your babel config (`babel.config.js`, `.babelrc`, `.babelrc.js`). You should already have this setup as part of running/testing your code but if you don't you can learn more [here](https://flow.org/en/docs/tools/babel/)
-
-For ESLint flat config (`eslint.config.js`), this config is not available.
 
 ---
 
@@ -123,7 +147,6 @@ When `true`, only checks files with a [`@flow` annotation](http://flow.org/docs/
 {"gitdown": "include", "file": "./rules/array-style-simple-type.md"}
 {"gitdown": "include", "file": "./rules/arrow-parens.md"}
 {"gitdown": "include", "file": "./rules/boolean-style.md"}
-{"gitdown": "include", "file": "./rules/define-flow-type.md"}
 {"gitdown": "include", "file": "./rules/delimiter-dangle.md"}
 {"gitdown": "include", "file": "./rules/enforce-line-break.md"}
 {"gitdown": "include", "file": "./rules/enforce-suppression-code.md"}
@@ -165,6 +188,5 @@ When `true`, only checks files with a [`@flow` annotation](http://flow.org/docs/
 {"gitdown": "include", "file": "./rules/type-id-match.md"}
 {"gitdown": "include", "file": "./rules/type-import-style.md"}
 {"gitdown": "include", "file": "./rules/union-intersection-spacing.md"}
-{"gitdown": "include", "file": "./rules/use-flow-type.md"}
 {"gitdown": "include", "file": "./rules/use-read-only-spread.md"}
 {"gitdown": "include", "file": "./rules/valid-syntax.md"}
