@@ -20,6 +20,7 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org/
 
+      - run: corepack enable
       - run: yarn
 
       - uses: JS-DevTools/npm-publish@v1

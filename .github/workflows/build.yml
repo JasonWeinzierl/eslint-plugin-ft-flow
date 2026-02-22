@@ -28,6 +28,7 @@ jobs:
 
     - uses: CultureHQ/actions-yarn@v1.0.1
 
+    - run: corepack enable
     - run: yarn
     - run: yarn check-docs
     - run: yarn check-tests
