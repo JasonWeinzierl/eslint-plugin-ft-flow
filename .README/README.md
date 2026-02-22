@@ -39,42 +39,51 @@ pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 
 ## Configuration (Flat Config)
 
-1. Set `languageOptions.parser` to `hermesESLintParser`.
+1. Set `languageOptions.parser` to `hermesESLintParser` imported from `'hermes-eslint'`.
 2. Add `plugins` section and specify `ft-flow` as a plugin.
 3. Enable rules.
 
 <!-- -->
 
-```js
-import hermesESLintParser from 'hermes-eslint';
-import ftFlow from 'eslint-plugin-ft-flow';
+```diff
++import hermesESLintParser from 'hermes-eslint';
++import ftFlow from 'eslint-plugin-ft-flow';
 
 export default [{
   plugins: {
-    'ft-flow': ftFlow,
++   'ft-flow': ftFlow,
   },
   languageOptions: {
-    parser: hermesESLintParser,
++   parser: hermesESLintParser,
   },
   settings: {
-    'ft-flow': {
-      onlyFilesWithFlowAnnotation: false,
-    },
++   'ft-flow': {
++     onlyFilesWithFlowAnnotation: false,
++   },
   },
   rules: {
-    'ft-flow/boolean-style': ['error', 'boolean'],
++   'ft-flow/boolean-style': ['error', 'boolean'],
     // ... more rules
   },
 }];
 ```
 
-## Configuration (eslintrc)
+Alternatively, you may prefer `babelESLintParser` imported from `@babel/eslint-parser`
+
+```js
+import babelESLintParser from '@babel/eslint-parser';
+
+...
+  languageOptions: {
+    parser: babelESLintParser,
+  }
+```
+
+## Legacy Configuration (eslintrc)
 
 1. Set `parser` property to `hermes-eslint`.
 2. Add `plugins` section and specify `ft-flow` as a plugin.
 3. Enable rules.
-
-<!-- -->
 
 ```json
 {
@@ -111,13 +120,21 @@ export default defineConfig({
 });
 ```
 
-To enable this configuration in your `.eslintrc`, use the `extends` property in your config file (instead of the previous suggested configuration):
+To enable this configuration in your `.eslintrc`, use the `extends` property in your `.eslintrc` file:
 
 ```json
 {
   "extends": ["plugin:ft-flow/recommended"]
 }
 ```
+
+#### Babel parser
+
+Alternatively, if you can't yet use `hermes-eslint`, prior to version 3.0.0 ft-flow shipped a recommended config that used `@babel/eslint-parser` which is still available under the `"plugin:ft-flow/babel-parser"` extension.
+
+Though it's recommended to switch to the recommended extension when possible as `babel-parser` may be removed in a future version.
+
+> By default the eslintrc config also comes preloaded with `@babel/eslint-parser` which means for eslint to analyze your flow code it relies your babel config (`babel.config.js`, `.babelrc`, `.babelrc.js`). You should already have this setup as part of running/testing your code but if you don't you can learn more [here](https://flow.org/en/docs/tools/babel/)
 
 ---
 
