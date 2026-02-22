@@ -15,8 +15,11 @@ jobs:
       matrix:
         node-version:
           - 20
-          - 22
-          - 24
+        eslint-version:
+          - 8
+          - 9
+          - 10
+    name: node=${{ matrix.node-version }}, eslint=${{ matrix.eslint-version }}
 
     steps:
     - name: Checkout repository
@@ -31,6 +34,8 @@ jobs:
 
     - run: corepack enable
     - run: yarn
+    - run: yarn add --dev eslint@${{ matrix.eslint-version }}
+
     - run: yarn check-docs
     - run: yarn check-tests
     - run: yarn lint
