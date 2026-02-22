@@ -71,7 +71,6 @@ export default {
         messageId: 'expectedParens',
       }],
       output: 'a(async (foo) => { if (true) {}; });',
-      languageOptions: { parserOptions: { ecmaVersion: 8 } },
     },
 
     // "as-needed"
@@ -96,7 +95,6 @@ export default {
       }],
       options: ['as-needed'],
       output: 'a => a',
-      languageOptions: { parserOptions: { ecmaVersion: 8 } },
     },
     {
       code: 'async (a) => a',
@@ -108,7 +106,6 @@ export default {
       }],
       options: ['as-needed'],
       output: 'async a => a',
-      languageOptions: { parserOptions: { ecmaVersion: 8 } },
     },
     {
       code: 'async(a) => a',
@@ -120,7 +117,6 @@ export default {
       }],
       options: ['as-needed'],
       output: 'async a => a',
-      languageOptions: { parserOptions: { ecmaVersion: 8 } },
     },
 
     // "as-needed", { "requireForBlockBody": true }
@@ -156,7 +152,6 @@ export default {
       }],
       options: ['as-needed', { requireForBlockBody: true }],
       output: 'async (a) => {}',
-      languageOptions: { parserOptions: { ecmaVersion: 8 } },
     },
     {
       code: 'async (a) => a',
@@ -168,7 +163,6 @@ export default {
       }],
       options: ['as-needed', { requireForBlockBody: true }],
       output: 'async a => a',
-      languageOptions: { parserOptions: { ecmaVersion: 8 } },
     },
     {
       code: 'async(a) => a',
@@ -180,7 +174,6 @@ export default {
       }],
       options: ['as-needed', { requireForBlockBody: true }],
       output: 'async a => a',
-      languageOptions: { parserOptions: { ecmaVersion: 8 } },
     },
   ],
 
@@ -224,7 +217,6 @@ export default {
     { code: 'a.then((foo) => { if (true) {}; });' },
     {
       code: 'a.then(async (foo) => { if (true) {}; });',
-      languageOptions: { parserOptions: { ecmaVersion: 8 } },
     },
 
     // "always" (explicit)
@@ -255,7 +247,6 @@ export default {
     {
       code: 'a.then(async (foo) => { if (true) {}; });',
       options: ['always'],
-      languageOptions: { parserOptions: { ecmaVersion: 8 } },
     },
 
     // "as-needed"
@@ -294,12 +285,10 @@ export default {
     {
       code: 'async ([a, b]) => {}',
       options: ['as-needed'],
-      languageOptions: { parserOptions: { ecmaVersion: 8 } },
     },
     {
       code: 'async (a, b) => {}',
       options: ['as-needed'],
-      languageOptions: { parserOptions: { ecmaVersion: 8 } },
     },
     {
       code: '(a: T) => a',
@@ -354,12 +343,10 @@ export default {
     {
       code: 'async a => ({})',
       options: ['as-needed', { requireForBlockBody: true }],
-      languageOptions: { parserOptions: { ecmaVersion: 8 } },
     },
     {
       code: 'async a => a',
       options: ['as-needed', { requireForBlockBody: true }],
-      languageOptions: { parserOptions: { ecmaVersion: 8 } },
     },
     {
       code: '(a: T) => a',
