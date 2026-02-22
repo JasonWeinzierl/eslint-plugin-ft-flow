@@ -34,6 +34,7 @@
   * [`array-style-simple-type`](#array-style-simple-type)
   * [`arrow-parens`](#arrow-parens)
   * [`boolean-style`](#boolean-style)
+  * [`define-flow-type`](#define-flow-type)
   * [`delimiter-dangle`](#delimiter-dangle)
   * [`enforce-line-break`](#enforce-line-break)
   * [`enforce-suppression-code`](#enforce-suppression-code)
@@ -75,6 +76,7 @@
   * [`type-id-match`](#type-id-match)
   * [`type-import-style`](#type-import-style)
   * [`union-intersection-spacing`](#union-intersection-spacing)
+  * [`use-flow-type`](#use-flow-type)
   * [`use-read-only-spread`](#use-read-only-spread)
   * [`valid-syntax`](#valid-syntax)
 
@@ -657,6 +659,171 @@ type X = bool
 // Options: ["boolean"]
 // Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 type X = bool
+```
+
+
+
+<a name="define-flow-type"></a>
+### `define-flow-type`
+
+> @deprecated rule that is no longer needed with the current recommended config but kept around in case people want to continue using it with `@babel/eslint-parser` such as the `babel-parser` extension.
+
+Marks Flow type identifiers as defined.
+
+Used to suppress [`no-undef`](http://eslint.org/docs/rules/no-undef) reporting of type identifiers.
+
+The following patterns are not considered problems:
+
+```js
+var a: AType
+// Additional rules: {"no-undef":2}
+
+var a: AType; var b: AType
+// Additional rules: {"no-undef":2}
+
+var a; (a: AType)
+// Additional rules: {"no-undef":2}
+
+var a: AType<BType>
+// Additional rules: {"no-undef":2}
+
+type A = AType
+// Additional rules: {"no-undef":2}
+
+declare type A = number
+// Additional rules: {"no-undef":2}
+
+opaque type A = AType
+// Additional rules: {"no-undef":2}
+
+function f(a: AType) {}
+// Additional rules: {"no-undef":2}
+
+function f(a: AType.a) {}
+// Additional rules: {"no-undef":2}
+
+function f(a: AType.a.b) {}
+// Additional rules: {"no-undef":2}
+
+function f(a): AType {}; var a: AType
+// Additional rules: {"no-undef":2}
+
+function f(a): AType {}
+// Additional rules: {"no-undef":2}
+
+class C { a: AType }
+// Additional rules: {"no-undef":2}
+
+class C { a: AType.a }
+// Additional rules: {"no-undef":2}
+
+class C { a: AType.a.b }
+// Additional rules: {"no-undef":2}
+
+class C implements AType {}
+// Additional rules: {"no-undef":2}
+
+declare interface A {}
+// Additional rules: {"no-undef":2}
+
+({ a: ({b() {}}: AType) })
+// Additional rules: {"no-undef":2}
+
+type X = {Y<AType>(): BType}
+// Additional rules: {"no-undef":2}
+
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
+
+/**
+* Copyright 2019 no corp
+* @flow
+*/
+type Foo = $ReadOnly<{}>
+// Additional rules: {"no-undef":2}
+
+enum Status { Active, Paused }
+// Additional rules: {"no-undef":2}
+
+enum Status { Active = 'active', Paused = 'paused' }
+// Additional rules: {"no-undef":2}
+
+enum Status { Active = 1, Paused = 2 }
+// Additional rules: {"no-undef":2}
+
+var a: AType
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+var a: AType; var b: AType
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+var a; (a: AType)
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+var a: AType<BType>
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+type A = AType
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+declare type A = number
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+opaque type A = AType
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+function f(a: AType) {}
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+function f(a: AType.a) {}
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+function f(a: AType.a.b) {}
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+function f(a): AType {}; var a: AType
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+function f(a): AType {}
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+class C { a: AType }
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+class C { a: AType.a }
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+class C { a: AType.a.b }
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+class C implements AType {}
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+declare interface A {}
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+({ a: ({b() {}}: AType) })
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+type X = {Y<AType>(): BType}
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+// Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
+
+/**
+* Copyright 2019 no corp
+* @flow
+*/
+type Foo = $ReadOnly<{}>
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+enum Status { Active, Paused }
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+enum Status { Active = 'active', Paused = 'paused' }
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
+
+enum Status { Active = 1, Paused = 2 }
+// Additional rules: {"no-undef":2,"no-use-before-define":[2,"nofunc"]}
 ```
 
 
@@ -7014,6 +7181,42 @@ type X =
 
 // Settings: {"ft-flow":{"onlyFilesWithFlowAnnotation":true}}
 type X = string& number;
+```
+
+
+
+<a name="use-flow-type"></a>
+### `use-flow-type`
+
+> @deprecated rule that is no longer needed with the current recommended config but kept around in case people want to continue using it with `@babel/eslint-parser` such as the `babel-parser` extension.
+
+Marks Flow [type alias](https://flowtype.org/docs/type-aliases.html) declarations as used.
+
+Used to suppress [`no-unused-vars`](http://eslint.org/docs/rules/no-unused-vars) errors that are triggered by type aliases.
+
+The following patterns are not considered problems:
+
+```js
+declare class A {}
+// Additional rules: {"no-unused-vars":1}
+
+declare function A(): Y
+// Additional rules: {"no-unused-vars":1}
+
+declare module A {}
+// Additional rules: {"no-unused-vars":1}
+
+declare module A { declare var a: Y }
+// Additional rules: {"no-unused-vars":1}
+
+declare var A: Y
+// Additional rules: {"no-unused-vars":1}
+
+import type A from "a"; type X<B = ComponentType<A>> = { b: B }; let x: X; console.log(x);
+// Additional rules: {"no-unused-vars":1}
+
+import type A from "a"; type X<B = A<string>> = { b: B }; let x: X; console.log(x);
+// Additional rules: {"no-unused-vars":1}
 ```
 
 

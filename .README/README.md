@@ -147,6 +147,7 @@ When `true`, only checks files with a [`@flow` annotation](http://flow.org/docs/
 {"gitdown": "include", "file": "./rules/array-style-simple-type.md"}
 {"gitdown": "include", "file": "./rules/arrow-parens.md"}
 {"gitdown": "include", "file": "./rules/boolean-style.md"}
+{"gitdown": "include", "file": "./rules/define-flow-type.md"}
 {"gitdown": "include", "file": "./rules/delimiter-dangle.md"}
 {"gitdown": "include", "file": "./rules/enforce-line-break.md"}
 {"gitdown": "include", "file": "./rules/enforce-suppression-code.md"}
@@ -188,5 +189,6 @@ When `true`, only checks files with a [`@flow` annotation](http://flow.org/docs/
 {"gitdown": "include", "file": "./rules/type-id-match.md"}
 {"gitdown": "include", "file": "./rules/type-import-style.md"}
 {"gitdown": "include", "file": "./rules/union-intersection-spacing.md"}
+{"gitdown": "include", "file": "./rules/use-flow-type.md"}
 {"gitdown": "include", "file": "./rules/use-read-only-spread.md"}
 {"gitdown": "include", "file": "./rules/valid-syntax.md"}
