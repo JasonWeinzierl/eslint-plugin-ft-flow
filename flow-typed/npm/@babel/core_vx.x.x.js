@@ -1,4 +1,4 @@
-// flow-typed signature: 90f75a7baf238b240d40858f3c6ae338
+// flow-typed signature: 17494571d34872df54be819529d9907b
 // flow-typed version: <<STUB>>/@babel/core_v^7.16.5/flow_v0.167.1
 
 /**
@@ -42,10 +42,6 @@ declare module '@babel/core/lib/config/files/configuration' {
   declare module.exports: any;
 }
 
-declare module '@babel/core/lib/config/files/import' {
-  declare module.exports: any;
-}
-
 declare module '@babel/core/lib/config/files/index-browser' {
   declare module.exports: any;
 }
@@ -79,6 +75,10 @@ declare module '@babel/core/lib/config/full' {
 }
 
 declare module '@babel/core/lib/config/helpers/config-api' {
+  declare module.exports: any;
+}
+
+declare module '@babel/core/lib/config/helpers/deep-array' {
   declare module.exports: any;
 }
 
@@ -138,11 +138,23 @@ declare module '@babel/core/lib/config/validation/removed' {
   declare module.exports: any;
 }
 
+declare module '@babel/core/lib/errors/config-error' {
+  declare module.exports: any;
+}
+
+declare module '@babel/core/lib/errors/rewrite-stack-trace' {
+  declare module.exports: any;
+}
+
 declare module '@babel/core/lib/gensync-utils/async' {
   declare module.exports: any;
 }
 
 declare module '@babel/core/lib/gensync-utils/fs' {
+  declare module.exports: any;
+}
+
+declare module '@babel/core/lib/gensync-utils/functional' {
   declare module.exports: any;
 }
 
@@ -214,11 +226,11 @@ declare module '@babel/core/lib/transformation/plugin-pass' {
   declare module.exports: any;
 }
 
-declare module '@babel/core/lib/transformation/util/clone-deep-browser' {
+declare module '@babel/core/lib/transformation/util/clone-deep' {
   declare module.exports: any;
 }
 
-declare module '@babel/core/lib/transformation/util/clone-deep' {
+declare module '@babel/core/lib/vendor/import-meta-resolve' {
   declare module.exports: any;
 }
 
@@ -237,9 +249,6 @@ declare module '@babel/core/lib/config/config-descriptors.js' {
 }
 declare module '@babel/core/lib/config/files/configuration.js' {
   declare module.exports: $Exports<'@babel/core/lib/config/files/configuration'>;
-}
-declare module '@babel/core/lib/config/files/import.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/files/import'>;
 }
 declare module '@babel/core/lib/config/files/index-browser.js' {
   declare module.exports: $Exports<'@babel/core/lib/config/files/index-browser'>;
@@ -270,6 +279,9 @@ declare module '@babel/core/lib/config/full.js' {
 }
 declare module '@babel/core/lib/config/helpers/config-api.js' {
   declare module.exports: $Exports<'@babel/core/lib/config/helpers/config-api'>;
+}
+declare module '@babel/core/lib/config/helpers/deep-array.js' {
+  declare module.exports: $Exports<'@babel/core/lib/config/helpers/deep-array'>;
 }
 declare module '@babel/core/lib/config/helpers/environment.js' {
   declare module.exports: $Exports<'@babel/core/lib/config/helpers/environment'>;
@@ -316,11 +328,20 @@ declare module '@babel/core/lib/config/validation/plugins.js' {
 declare module '@babel/core/lib/config/validation/removed.js' {
   declare module.exports: $Exports<'@babel/core/lib/config/validation/removed'>;
 }
+declare module '@babel/core/lib/errors/config-error.js' {
+  declare module.exports: $Exports<'@babel/core/lib/errors/config-error'>;
+}
+declare module '@babel/core/lib/errors/rewrite-stack-trace.js' {
+  declare module.exports: $Exports<'@babel/core/lib/errors/rewrite-stack-trace'>;
+}
 declare module '@babel/core/lib/gensync-utils/async.js' {
   declare module.exports: $Exports<'@babel/core/lib/gensync-utils/async'>;
 }
 declare module '@babel/core/lib/gensync-utils/fs.js' {
   declare module.exports: $Exports<'@babel/core/lib/gensync-utils/fs'>;
+}
+declare module '@babel/core/lib/gensync-utils/functional.js' {
+  declare module.exports: $Exports<'@babel/core/lib/gensync-utils/functional'>;
 }
 declare module '@babel/core/lib/index' {
   declare module.exports: $Exports<'@babel/core/lib'>;
@@ -382,9 +403,9 @@ declare module '@babel/core/lib/transformation/normalize-opts.js' {
 declare module '@babel/core/lib/transformation/plugin-pass.js' {
   declare module.exports: $Exports<'@babel/core/lib/transformation/plugin-pass'>;
 }
-declare module '@babel/core/lib/transformation/util/clone-deep-browser.js' {
-  declare module.exports: $Exports<'@babel/core/lib/transformation/util/clone-deep-browser'>;
-}
 declare module '@babel/core/lib/transformation/util/clone-deep.js' {
   declare module.exports: $Exports<'@babel/core/lib/transformation/util/clone-deep'>;
+}
+declare module '@babel/core/lib/vendor/import-meta-resolve.js' {
+  declare module.exports: $Exports<'@babel/core/lib/vendor/import-meta-resolve'>;
 }

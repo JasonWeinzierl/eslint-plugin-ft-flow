@@ -12,7 +12,17 @@ declare const plugin: {
 declare const ftFlow: typeof plugin & {
     configs: {
         recommended: {
-            parser: string,
+            parser: 'hermes-eslint',
+            plugins: ['ft-flow'],
+            settings: {
+                'ft-flow': {
+                    onlyFilesWithFlowAnnotation: boolean,
+                },
+            },
+            rules: Record<string, Linter.RuleSeverity>,
+        },
+        'babel-parser': {
+            parser: '@babel/eslint-parser',
             plugins: ['ft-flow'],
             settings: {
                 'ft-flow': {
@@ -24,7 +34,7 @@ declare const ftFlow: typeof plugin & {
     },
     flatConfigs: {
         recommended: {
-            name: string,
+            name: 'ft-flow/recommended',
             plugins: {
                 'ft-flow': typeof plugin,
             },

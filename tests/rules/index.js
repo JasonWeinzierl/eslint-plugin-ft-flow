@@ -2,8 +2,8 @@
 import assert from 'assert';
 import Ajv from 'ajv';
 import {
-  RuleTester,
   ESLint,
+  RuleTester,
 } from 'eslint';
 import {
   camelCase,
@@ -16,6 +16,7 @@ const reportingRules = [
   'array-style-simple-type',
   'arrow-parens',
   'boolean-style',
+  'define-flow-type',
   'delimiter-dangle',
   'enforce-line-break',
   'enforce-suppression-code',
@@ -57,6 +58,7 @@ const reportingRules = [
   'type-id-match',
   'type-import-style',
   'union-intersection-spacing',
+  'use-flow-type',
   'use-read-only-spread',
   'valid-syntax',
 ];
@@ -97,13 +99,17 @@ for (const ruleName of reportingRules) {
     }
   }
 
-  const parser = 'hermes-eslint';
-  const ruleTester = new RuleTester({
-    ...(assertions.otherRules ? { rules: assertions.otherRules } : {}),
-    ...(ESLint.version.startsWith('8.')
-      ? { parser: require.resolve(parser) }
-      : { languageOptions: { parser: require(parser) } }),
-  });
+  [
+    '@babel/eslint-parser',
+    'hermes-eslint',
+  ].forEach((parser) => {
+    const ruleTester = new RuleTester({
+      ...(assertions.otherRules ? { rules: assertions.otherRules } : {}),
+      ...(ESLint.version.startsWith('8.')
+        ? { parser: require.resolve(parser) }
+        : { languageOptions: { parser: require(parser) } }),
+    });
 
-  ruleTester.run(`${ruleName} with ${parser} parser`, plugin.rules[ruleName], assertions);
+    ruleTester.run(`${ruleName} with ${parser} parser`, plugin.rules[ruleName], assertions);
+  });
 }

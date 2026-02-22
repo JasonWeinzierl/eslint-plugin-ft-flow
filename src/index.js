@@ -3,11 +3,13 @@ import hermesESLintParser from 'hermes-eslint';
 
 import packageJson from '../package.json';
 import recommendedJson from './configs/recommended.json';
+import babelParserJson from './configs/babel-parser.json';
 
 import arrayStyleComplexType from './rules/arrayStyleComplexType';
 import arrayStyleSimpleType from './rules/arrayStyleSimpleType';
 import arrowParens from './rules/arrowParens';
 import booleanStyle from './rules/booleanStyle';
+import defineFlowType from './rules/defineFlowType';
 import delimiterDangle from './rules/delimiterDangle';
 import enforceLineBreak from './rules/enforceLineBreak';
 import enforceSuppressionCode from './rules/enforceSuppressionCode';
@@ -49,6 +51,7 @@ import spreadExactType from './rules/spreadExactType';
 import typeIdMatch from './rules/typeIdMatch';
 import typeImportStyle from './rules/typeImportStyle';
 import unionIntersectionSpacing from './rules/unionIntersectionSpacing';
+import useFlowType from './rules/useFlowType';
 import useReadOnlySpread from './rules/useReadOnlySpread';
 import validSyntax from './rules/validSyntax';
 import {
@@ -60,6 +63,7 @@ const rules = {
   'array-style-simple-type': arrayStyleSimpleType,
   'arrow-parens': arrowParens,
   'boolean-style': booleanStyle,
+  'define-flow-type': defineFlowType,
   'delimiter-dangle': delimiterDangle,
   'enforce-line-break': enforceLineBreak,
   'enforce-suppression-code': enforceSuppressionCode,
@@ -101,6 +105,7 @@ const rules = {
   'type-id-match': typeIdMatch,
   'type-import-style': typeImportStyle,
   'union-intersection-spacing': unionIntersectionSpacing,
+  'use-flow-type': useFlowType,
   'use-read-only-spread': useReadOnlySpread,
   'valid-syntax': validSyntax,
 };
@@ -127,6 +132,7 @@ const ftFlow = {
   ...plugin,
   configs: {
     recommended: recommendedJson,
+    'babel-parser': babelParserJson,
   },
   flatConfigs: {
     recommended: {
@@ -143,6 +149,7 @@ const ftFlow = {
   },
   rulesConfig: {
     'boolean-style': 0,
+    'define-flow-type': 0,
     'delimiter-dangle': 0,
     'generic-spacing': 0,
     'interface-id-match': 0,
@@ -172,6 +179,7 @@ const ftFlow = {
     'type-id-match': 0,
     'type-import-style': 0,
     'union-intersection-spacing': 0,
+    'use-flow-type': 0,
     'valid-syntax': 0,
   },
 };
