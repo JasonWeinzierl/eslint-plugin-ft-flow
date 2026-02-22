@@ -302,8 +302,10 @@ const ALWAYS_VALID = [
   'declare module A { declare var a: AType }',
 ];
 
+const isESLint8 = ESLint.version.startsWith('8.');
+
 const babelLanguageOptions = {
-  parser: ESLint.version.startsWith('8.')
+  parser: isESLint8
     ? require.resolve('@babel/eslint-parser')
     : require('@babel/eslint-parser'),
   parserOptions: {
@@ -325,7 +327,7 @@ const babelLanguageOptions = {
  */
 {
   const ruleTester = new RuleTester({
-    ...(ESLint.version.startsWith('8.')
+    ...(isESLint8
       ? babelLanguageOptions
       : { languageOptions: babelLanguageOptions }),
   });
@@ -338,7 +340,7 @@ const babelLanguageOptions = {
 
 {
   const ruleTester = new RuleTester({
-    ...(ESLint.version.startsWith('8.')
+    ...(isESLint8
       ? babelLanguageOptions
       : { languageOptions: babelLanguageOptions }),
   });

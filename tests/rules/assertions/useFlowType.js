@@ -146,8 +146,10 @@ const ALWAYS_VALID = [
   'declare type A = {}',
 ];
 
+const isESLint8 = ESLint.version.startsWith('8.');
+
 const babelLanguageOptions = {
-  parser: ESLint.version.startsWith('8.')
+  parser: isESLint8
     ? require.resolve('@babel/eslint-parser')
     : require('@babel/eslint-parser'),
   parserOptions: {
@@ -166,7 +168,7 @@ const babelLanguageOptions = {
  */
 {
   const ruleTester = new RuleTester({
-    ...(ESLint.version.startsWith('8.')
+    ...(isESLint8
       ? babelLanguageOptions
       : { languageOptions: babelLanguageOptions }),
   });
@@ -179,7 +181,7 @@ const babelLanguageOptions = {
 
 {
   const ruleTester = new RuleTester({
-    ...(ESLint.version.startsWith('8.')
+    ...(isESLint8
       ? babelLanguageOptions
       : { languageOptions: babelLanguageOptions }),
   });
@@ -195,13 +197,15 @@ const babelLanguageOptions = {
 
 {
   const ruleTester = new RuleTester({
-    ...(ESLint.version.startsWith('8.')
+    ...(isESLint8
       ? babelLanguageOptions
       : { languageOptions: babelLanguageOptions }),
-    rules: {
+    rules: isESLint8 ? {
+      'use-flow-type': 1,
+    } : {
       'ft-flow/use-flow-type': 1,
     },
-    plugins: {
+    plugins: isESLint8 ? [] : {
       'ft-flow': {
         rules: {
           'use-flow-type': useFlowType,
@@ -210,6 +214,9 @@ const babelLanguageOptions = {
     },
   });
 
+  if (isESLint8) {
+    ruleTester.defineRule('use-flow-type', useFlowType);
+  }
   ruleTester.run('use-flow-type must not affect no-unused-vars behavior in these cases', getNoUnusedVarsRuleWithoutSuggestions(), {
     invalid: ALWAYS_INVALID,
     valid: ALWAYS_VALID,
