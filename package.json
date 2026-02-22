@@ -22,7 +22,7 @@
     "check-docs": "babel-node ./scripts/checkDocs",
     "check-tests": "babel-node ./scripts/checkTests",
     "create-readme": "node ./scripts/genReadme && babel-node ./scripts/addAssertions",
-    "lint": "eslint",
+    "lint": "yarn build && eslint",
     "test:rules": "mocha --require @babel/register ./tests/rules/index.js",
     "test": "yarn jest && yarn test:rules",
     "prepublishOnly": "yarn create-readme && yarn build"
