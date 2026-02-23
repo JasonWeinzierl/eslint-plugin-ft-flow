@@ -39,7 +39,7 @@ declare const ftFlow: typeof plugin & {
                 'ft-flow': typeof plugin,
             },
             languageOptions: {
-                parser: any,
+                parser: Linter.Parser,
             },
             settings: {
                 'ft-flow': {
