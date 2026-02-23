@@ -48,6 +48,21 @@ declare const ftFlow: typeof plugin & {
             },
             rules: Record<string, Linter.RuleSeverity>,
         },
+        custom: <TParser extends Linter.Parser>(options: { parser: TParser }) => {
+            name: 'ft-flow/custom-recommended',
+            plugins: {
+                'ft-flow': typeof plugin,
+            },
+            languageOptions: {
+                parser: TParser,
+            },
+            settings: {
+                'ft-flow': {
+                    onlyFilesWithFlowAnnotation: boolean,
+                },
+            },
+            rules: Record<string, Linter.RuleSeverity>,
+        },
     },
 };
 

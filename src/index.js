@@ -146,6 +146,17 @@ const ftFlow = {
       settings: recommendedJson.settings,
       rules: recommendedJson.rules,
     },
+    custom: ({ parser }) => ({
+      name: 'ft-flow/custom-recommended',
+      plugins: {
+        'ft-flow': plugin,
+      },
+      languageOptions: {
+        parser,
+      },
+      settings: babelParserJson.settings,
+      rules: babelParserJson.rules,
+    }),
   },
   rulesConfig: {
     'boolean-style': 0,
