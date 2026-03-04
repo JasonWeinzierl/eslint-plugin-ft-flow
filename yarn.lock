@@ -3712,7 +3712,7 @@ __metadata:
     flow-bin: "npm:^0.167.1"
     flow-copy-source: "npm:^2.0.9"
     glob: "npm:^7.2.0"
-    hermes-eslint: "npm:~0.32.1"
+    hermes-eslint: "npm:~0.33.3"
     husky: "npm:^7.0.4"
     jest: "npm:^27.4.5"
     lint-staged: "npm:^12.1.2"
@@ -3723,7 +3723,7 @@ __metadata:
   peerDependencies:
     "@babel/eslint-parser": ^7.16.5
     eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
-    hermes-eslint: ">=0.15.0 <0.33.0"
+    hermes-eslint: ">=0.15.0 <0.34.0"
   peerDependenciesMeta:
     "@babel/eslint-parser":
       optional: true
@@ -4583,30 +4583,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hermes-eslint@npm:~0.32.1":
-  version: 0.32.1
-  resolution: "hermes-eslint@npm:0.32.1"
+"hermes-eslint@npm:~0.33.3":
+  version: 0.33.3
+  resolution: "hermes-eslint@npm:0.33.3"
   dependencies:
     esrecurse: "npm:^4.3.0"
-    hermes-estree: "npm:0.32.1"
-    hermes-parser: "npm:0.32.1"
-  checksum: 10c0/66eccdeeede64e93825c987878b5827d9592b94a601f68c2eaddc6a503cccad90649b773614368527575bcd7cfee1a2e1a3cec7bc3c60c9ca3a5c6be860f75e5
+    hermes-estree: "npm:0.33.3"
+    hermes-parser: "npm:0.33.3"
+  checksum: 10c0/5894dbe52f5de698934d7cba0fda512d685651763df0e436cbe7e354ca3dff19bf57d1738b7a86d29f7482cfaac9791ed77d96f81150a74518ff7370da257bd2
   languageName: node
   linkType: hard
 
-"hermes-estree@npm:0.32.1":
-  version: 0.32.1
-  resolution: "hermes-estree@npm:0.32.1"
-  checksum: 10c0/750d1e26c0df4aae15707765368352c6a34934939df09d96e6d260ee1e1500e753f7a18adac56647ef8ca2057e8f0e5d21ae07b97103b0d9c94d68afee154c5e
+"hermes-estree@npm:0.33.3":
+  version: 0.33.3
+  resolution: "hermes-estree@npm:0.33.3"
+  checksum: 10c0/4e04e767a706a93c59d64ef3f114075aeb93b08433655d4f11d310f0785c2a74d5b5041b80bc34d22630dece54865dd93a53fde160d48b8369cfef10dbd0520b
   languageName: node
   linkType: hard
 
-"hermes-parser@npm:0.32.1":
-  version: 0.32.1
-  resolution: "hermes-parser@npm:0.32.1"
+"hermes-parser@npm:0.33.3":
+  version: 0.33.3
+  resolution: "hermes-parser@npm:0.33.3"
   dependencies:
-    hermes-estree: "npm:0.32.1"
-  checksum: 10c0/77dc8b116c51d1b30ba9942629d4965301f2c7fa6a751a1842828d110ce33410daed5755ce8943a110dbfc6a5cafc704ddbfb7559e76b5c3170d2173c513047c
+    hermes-estree: "npm:0.33.3"
+  checksum: 10c0/f7d69de54c77321d8481e37a323bbac01d180ec982275ef8925ceaaf7e501fc3062593e84cf5da50852f36daffb34d0f5d6cbbef079fd0125a7b91c1fe84f225
   languageName: node
   linkType: hard
 

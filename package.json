@@ -61,7 +61,7 @@
     "flow-bin": "^0.167.1",
     "flow-copy-source": "^2.0.9",
     "glob": "^7.2.0",
-    "hermes-eslint": "~0.32.1",
+    "hermes-eslint": "~0.33.3",
     "husky": "^7.0.4",
     "jest": "^27.4.5",
     "lint-staged": "^12.1.2",
@@ -71,7 +71,7 @@
   "peerDependencies": {
     "@babel/eslint-parser": "^7.16.5",
     "eslint": "^8.57.0 || ^9.0.0 || ^10.0.0",
-    "hermes-eslint": ">=0.15.0 <0.33.0"
+    "hermes-eslint": ">=0.15.0 <0.34.0"
   },
   "peerDependenciesMeta": {
     "@babel/eslint-parser": {

@@ -29,7 +29,8 @@ const create = (context) => {
         break;
       case 'TupleTypeAnnotation':
       // eslint-disable-next-line no-use-before-define
-        value = buildArrayStructure(element.types);
+        // hermes-parser 0.33+ uses `elementTypes`; keep 0.32 `types` backward compatible.
+        value = buildArrayStructure(element.types || element.elementTypes);
         break;
       default:
         value = element.value;
