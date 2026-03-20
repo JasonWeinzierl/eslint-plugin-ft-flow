@@ -115,6 +115,7 @@ const plugin = {
     version: packageJson.version,
     namespace: 'ft-flow',
   },
+  /** @type {Record<string, import("eslint").Rule.RuleModule>} */
   rules: _.mapValues(rules, (rule, key) => {
     if (['no-types-missing-file-annotation', 'require-valid-file-annotation'].includes(key)) {
       return rule;
@@ -130,8 +131,11 @@ const plugin = {
 const ftFlow = {
   ...plugin,
   configs: {
+    /** @type {import("eslint").Linter.LegacyConfig} */
     recommended: recommendedJson,
+    /** @type {import("eslint").Linter.LegacyConfig} */
     'babel-parser': babelParserJson,
+    /** @type {import("eslint").Linter.FlatConfig} */
     'flat/recommended': {
       name: 'ft-flow/recommended',
       plugins: {
@@ -145,6 +149,7 @@ const ftFlow = {
       settings: recommendedJson.settings,
       rules: recommendedJson.rules,
     },
+    /** @type {import("eslint").Linter.FlatConfig} */
     'flat/babel-parser': {
       name: 'ft-flow/custom-recommended',
       plugins: {
