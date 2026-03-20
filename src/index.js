@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import hermesESLintParser from 'hermes-eslint';
 
 import packageJson from '../package.json';
 import recommendedJson from './configs/recommended.json';
@@ -133,65 +132,32 @@ const ftFlow = {
   configs: {
     recommended: recommendedJson,
     'babel-parser': babelParserJson,
-  },
-  flatConfigs: {
-    recommended: {
+    'flat/recommended': {
       name: 'ft-flow/recommended',
       plugins: {
         'ft-flow': plugin,
       },
       languageOptions: {
-        parser: hermesESLintParser,
+        get parser() {
+          return require('hermes-eslint');
+        },
       },
       settings: recommendedJson.settings,
       rules: recommendedJson.rules,
     },
-    custom: ({ parser }) => ({
+    'flat/babel-parser': {
       name: 'ft-flow/custom-recommended',
       plugins: {
         'ft-flow': plugin,
       },
       languageOptions: {
-        parser,
+        get parser() {
+          return require('@babel/eslint-parser');
+        },
       },
       settings: babelParserJson.settings,
       rules: babelParserJson.rules,
-    }),
-  },
-  rulesConfig: {
-    'boolean-style': 0,
-    'define-flow-type': 0,
-    'delimiter-dangle': 0,
-    'generic-spacing': 0,
-    'interface-id-match': 0,
-    'newline-after-flow-annotation': 0,
-    'no-dupe-keys': 0,
-    'no-duplicate-type-union-intersection-members': 0,
-    'no-flow-fix-me-comments': 0,
-    'no-mixed': 0,
-    'no-mutable-array': 0,
-    'no-weak-types': 0,
-    'object-type-curly-spacing': 0,
-    'object-type-delimiter': 0,
-    quotes: 0,
-    'require-compound-type-alias': 0,
-    'require-exact-type': 0,
-    'require-parameter-type': 0,
-    'require-readonly-react-props': 0,
-    'require-return-type': 0,
-    'require-variable-type': 0,
-    semi: 0,
-    'sort-keys': 0,
-    'sort-type-union-intersection-members': 0,
-    'space-after-type-colon': 0,
-    'space-before-generic-bracket': 0,
-    'space-before-type-colon': 0,
-    'spread-exact-type': 0,
-    'type-id-match': 0,
-    'type-import-style': 0,
-    'union-intersection-spacing': 0,
-    'use-flow-type': 0,
-    'valid-syntax': 0,
+    },
   },
 };
 
