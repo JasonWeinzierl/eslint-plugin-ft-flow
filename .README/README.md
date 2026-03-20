@@ -37,19 +37,56 @@ yarn add -D eslint-plugin-ft-flow eslint hermes-eslint
 pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 ```
 
-## Configuration (Flat Config)
+## Flat Configuration
 
-1. Set `languageOptions.parser` to `hermesESLintParser` imported from `'hermes-eslint'`.
-2. Add `plugins` section and specify `ft-flow` as a plugin.
-3. Enable rules.
+### Shared flat configurations
 
-<!-- -->
+This plugin exports a recommended configuration that enforces Flowtype best practices.
+
+To enable this configuration in the ESLint flat config, use:
 
 ```diff
+import { defineConfig } from 'eslint/config';
++import ftFlow from 'eslint-plugin-ft-flow';
+
+export default defineConfig({
+  extends: [
++   ftFlow.configs['flat/recommended'],
+  ],
+});
+```
+
+Alternatively, you may prefer the Babel ESLint parser-enabled configuration:
+
+```diff
+import { defineConfig } from 'eslint/config';
++import ftFlow from 'eslint-plugin-ft-flow';
+
+export default defineConfig({
+  extends: [
++   ftFlow.configs['flat/babel-parser'],
+  ],
+});
+```
+
+> [!NOTE]
+> When using `@babel/eslint-parser`, in order for ESLint to analyze your flow code, it relies your babel config (`babel.config.js`, `.babelrc`, `.babelrc.js`).
+> You should already have this setup as part of running/testing your code but if you don't you can [learn more here](https://flow.org/en/docs/tools/babel/).
+
+### Manual flat setup
+
+To set this plugin up without using a shared configuration:
+
+1. Set `languageOptions.parser` to your chosen parser.
+2. Add the `plugins` section and set `ft-flow` to this plugin.
+3. Enable rules.
+
+```diff
+import { defineConfig } from 'eslint/config';
 +import hermesESLintParser from 'hermes-eslint';
 +import ftFlow from 'eslint-plugin-ft-flow';
 
-export default [{
+export default defineConfig({
   plugins: {
 +   'ft-flow': ftFlow,
   },
@@ -65,24 +102,42 @@ export default [{
 +   'ft-flow/boolean-style': ['error', 'boolean'],
     // ... more rules
   },
-}];
+});
 ```
 
-Alternatively, you may prefer `babelESLintParser` imported from `@babel/eslint-parser`:
+Alternatively, you may set `parser` using `import babelESLintParser from '@babel/eslint-parser'` if you can't yet use `hermes-eslint`.
+When using the Babel parser, you may need to enable the following deprecated rules, which patch in behavior that `hermes-eslint` does automatically:
 
-```diff
-+import babelESLintParser from '@babel/eslint-parser';
+- `ft-flow/use-flow-type`
+- `ft-flow/define-flow-type`
 
-...
-  languageOptions: {
-+   parser: babelESLintParser,
-  },
-...
+## Legacy Configuration
+
+### Shared legacy configurations
+
+This plugin exports a [recommended configuration](./src/configs/recommended.json) that enforces Flowtype best practices.
+
+To enable this configuration, use the `extends` property in your `.eslintrc` config file:
+
+```json
+{
+  "extends": ["plugin:ft-flow/recommended"]
+}
 ```
 
-## Legacy Configuration (eslintrc)
+Alternatively, if you can't yet use `hermes-eslint`, prior to version 3.0.0, ft-flow shipped a recommended config that used `@babel/eslint-parser` which is still available under the `"plugin:ft-flow/babel-parser"` extension.
 
-1. Set `parser` property to `hermes-eslint` or `@babel/eslint-parser`.
+Though it's recommended to switch to the recommended extension when possible as `babel-parser` may be removed in a future version.
+
+```json
+{
+  "extends": ["plugin:ft-flow/babel-parser"]
+}
+```
+
+### Manual legacy setup
+
+1. Set `parser` property to `hermes-eslint`.
 2. Add `plugins` section and specify `ft-flow` as a plugin.
 3. Enable rules.
 
@@ -102,54 +157,11 @@ Alternatively, you may prefer `babelESLintParser` imported from `@babel/eslint-p
 }
 ```
 
-### Shareable configurations
+Alternatively, you may set `parser` to `@babel/eslint-parser` if you can't yet use `hermes-eslint`.
+When using the Babel parser, you may need to enable the following deprecated rules, which patch in behavior that `hermes-eslint` does automatically:
 
-#### Recommended
-
-This plugin exports a [recommended configuration](./src/configs/recommended.json) that enforces Flowtype best practices.
-
-To enable this configuration in the ESLint flat config (`eslint.config.js`), use:
-
-```diff
-import { defineConfig } from 'eslint/config';
-+import ftFlow from 'eslint-plugin-ft-flow';
-
-export default defineConfig({
-  extends: [
-+   ftFlow.flatConfigs.recommended,
-  ],
-});
-```
-
-To enable this configuration in your `.eslintrc`, use the `extends` property in your `.eslintrc` file:
-
-```json
-{
-  "extends": ["plugin:ft-flow/recommended"]
-}
-```
-
-#### Babel parser
-
-Alternatively, if you can't yet use `hermes-eslint`, prior to version 3.0.0, ft-flow shipped a recommended config that used `@babel/eslint-parser` which is still available under the `"plugin:ft-flow/babel-parser"` extension.
-
-Though it's recommended to switch to the recommended extension when possible as `babel-parser` may be removed in a future version.
-
-> By default the eslintrc config also comes preloaded with `@babel/eslint-parser` which means for eslint to analyze your flow code it relies your babel config (`babel.config.js`, `.babelrc`, `.babelrc.js`). You should already have this setup as part of running/testing your code but if you don't you can learn more [here](https://flow.org/en/docs/tools/babel/)
-
-To use the Babel parser with the flag config, use:
-
-```diff
-import { defineConfig } from 'eslint/config';
-+import ftFlow from 'eslint-plugin-ft-flow';
-+import babelESLintParser from '@babel/eslint-parser';
-
-export default defineConfig({
-  extends: [
-+   ftFlow.flatConfigs.custom({ parser: babelESLintParser }),
-  ],
-});
-```
+- `ft-flow/use-flow-type`
+- `ft-flow/define-flow-type`
 
 ---
 
