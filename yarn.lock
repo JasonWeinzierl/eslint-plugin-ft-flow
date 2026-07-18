@@ -3670,12 +3670,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-fb-flow@npm:^0.0.4":
-  version: 0.0.4
-  resolution: "eslint-plugin-fb-flow@npm:0.0.4"
+"eslint-plugin-fb-flow@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "eslint-plugin-fb-flow@npm:0.0.5"
   peerDependencies:
     eslint: ">=6"
-  checksum: 10c0/3f542283108d7ff76d1445a34c1338e901e31c2d2b04a7e9a653139eb4d5846f8b1ffe4f92275046ac09c5b0212205ac7a8c79e8c127efaece02587dc59448fc
+  checksum: 10c0/5294846ffb4eee135cad974c49f8c1bef539be473d5836cb2c19f2df9214c192c44069005e865f348582d9a55ab8c9c2a2cae8939613ad1565f3fb769af8ab85
   languageName: node
   linkType: hard
 
@@ -3700,7 +3700,7 @@ __metadata:
     eslint: "npm:^10.1.0"
     eslint-config-airbnb: "npm:^19.0.4"
     eslint-config-bzc: "npm:^1.0.14"
-    eslint-plugin-fb-flow: "npm:^0.0.4"
+    eslint-plugin-fb-flow: "npm:^0.0.5"
     eslint-plugin-ft-flow: "workspace:*"
     eslint-plugin-import: "npm:^2.32.0"
     eslint-plugin-jest: "npm:^29.15.0"
