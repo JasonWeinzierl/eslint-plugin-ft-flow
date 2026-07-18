@@ -97,6 +97,10 @@ yarn add -D eslint-plugin-ft-flow eslint hermes-eslint
 pnpm add -D eslint-plugin-ft-flow eslint hermes-eslint
 ```
 
+> [!IMPORTANT]
+> ESLint 10 requires `hermes-eslint` >=0.37 or `@babel/eslint-parser` >=8 for Flow parsing.
+> Earlier versions of these parsers do not support ESLint 10.
+
 <a name="flat-configuration"></a>
 ## Flat Configuration
 
