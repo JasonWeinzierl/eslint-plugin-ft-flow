@@ -12,9 +12,9 @@
   "scripts": {
     "build:flow": "flow-copy-source --ignore '*.spec.*' src dist",
     "build": "rimraf ./dist && NODE_ENV=production babel ./src --out-dir ./dist --copy-files && yarn build:flow",
-    "check-docs": "babel-node ./scripts/checkDocs",
-    "check-tests": "babel-node ./scripts/checkTests",
-    "create-readme": "node ./scripts/genReadme && babel-node ./scripts/addAssertions",
+    "check-docs": "node --require @babel/register ./scripts/checkDocs",
+    "check-tests": "node --require @babel/register ./scripts/checkTests",
+    "create-readme": "node ./scripts/genReadme && node --require @babel/register ./scripts/addAssertions",
     "lint": "yarn build && eslint",
     "test:rules": "mocha --require @babel/register ./tests/rules/index.js",
     "test": "yarn jest && yarn test:rules",
@@ -28,7 +28,6 @@
     "@babel/cli": "^8.0.4",
     "@babel/core": "^8.0.1",
     "@babel/eslint-parser": "^8.0.1",
-    "@babel/node": "^8.0.1",
     "@babel/plugin-syntax-flow": "^8.0.1",
     "@babel/plugin-transform-react-jsx": "^8.0.1",
     "@babel/preset-env": "^8.0.2",
@@ -59,11 +58,6 @@
     "lint-staged": "^12.1.2",
     "mocha": "^10.1.0",
     "rimraf": "^3.0.2"
-  },
-  "dependenciesMeta": {
-    "core-js": {
-      "built": false
-    }
   },
   "peerDependencies": {
     "@babel/eslint-parser": "^7.16.5 || ^8.0.0",

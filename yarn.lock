@@ -435,22 +435,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/node@npm:^8.0.1":
-  version: 8.0.1
-  resolution: "@babel/node@npm:8.0.1"
-  dependencies:
-    "@babel/register": "npm:^8.0.1"
-    commander: "npm:^14.0.2"
-    core-js: "npm:^3.48.0"
-    v8flags: "npm:^4.0.1"
-  peerDependencies:
-    "@babel/core": ^8.0.0
-  bin:
-    babel-node: ./bin/babel-node.js
-  checksum: 10c0/b23a7d9d8c77454fbd32f4f00b78b097201a2b4b820dc127fad7d424f1abb9758cf2cadfed9f156bb519918f87592fee749a3c1dd1d5dd296832de06884b893a
-  languageName: node
-  linkType: hard
-
 "@babel/parser@npm:^7.1.0, @babel/parser@npm:^7.14.7, @babel/parser@npm:^7.28.6, @babel/parser@npm:^7.29.0, @babel/parser@npm:^7.7.2":
   version: 7.29.0
   resolution: "@babel/parser@npm:7.29.0"
@@ -3193,13 +3177,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.48.0":
-  version: 3.49.0
-  resolution: "core-js@npm:3.49.0"
-  checksum: 10c0/2e42edb47eda38fd5368380131623c8aa5d4a6b42164125b17744bdc08fa5ebbbdd06b4b4aa6ca3663470a560b0f2fba48e18f142dfe264b0039df85bc625694
-  languageName: node
-  linkType: hard
-
 "cross-spawn@npm:^7.0.3, cross-spawn@npm:^7.0.6":
   version: 7.0.6
   resolution: "cross-spawn@npm:7.0.6"
@@ -3794,7 +3771,6 @@ __metadata:
     "@babel/cli": "npm:^8.0.4"
     "@babel/core": "npm:^8.0.1"
     "@babel/eslint-parser": "npm:^8.0.1"
-    "@babel/node": "npm:^8.0.1"
     "@babel/plugin-syntax-flow": "npm:^8.0.1"
     "@babel/plugin-transform-react-jsx": "npm:^8.0.1"
     "@babel/preset-env": "npm:^8.0.2"
@@ -3831,9 +3807,6 @@ __metadata:
     "@babel/eslint-parser": ^7.16.5 || ^8.0.0
     eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
     hermes-eslint: ">=0.15.0 <0.38.0"
-  dependenciesMeta:
-    core-js:
-      built: false
   peerDependenciesMeta:
     "@babel/eslint-parser":
       optional: true
@@ -8260,13 +8233,6 @@ __metadata:
     convert-source-map: "npm:^1.6.0"
     source-map: "npm:^0.7.3"
   checksum: 10c0/4db98cc1ab0634e183353fb404e2dd9dec2dd3075372d4423c0acebff78d927b59dbb58ab729ab36c7d5168610b2aa5b3c885be8221b44ab937be1dbf2078c4b
-  languageName: node
-  linkType: hard
-
-"v8flags@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "v8flags@npm:4.0.1"
-  checksum: 10c0/59500e19ff9e7b4e2f09bcfe12d16d9443bf36a0e9b65b5fa6688f12c4b3f833d99ecd8debdbe856c047080bd0a73bd2ca5066f524efb1a87fdca6c1e0aecd74
   languageName: node
   linkType: hard
 
