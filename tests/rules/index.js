@@ -106,8 +106,32 @@ for (const ruleName of reportingRules) {
     const ruleTester = new RuleTester({
       ...(assertions.otherRules ? { rules: assertions.otherRules } : {}),
       ...(ESLint.version.startsWith('8.')
-        ? { parser: require.resolve(parser) }
-        : { languageOptions: { parser: require(parser) } }),
+        ? {
+          parser: require.resolve(parser),
+          ...(parser === '@babel/eslint-parser'
+            ? {
+              parserOptions: {
+                babelOptions: {
+                  parserOpts: { allowReturnOutsideFunction: true },
+                },
+              },
+            }
+            : {}),
+        }
+        : {
+          languageOptions: {
+            parser: require(parser),
+            ...(parser === '@babel/eslint-parser'
+              ? {
+                parserOptions: {
+                  babelOptions: {
+                    parserOpts: { allowReturnOutsideFunction: true },
+                  },
+                },
+              }
+              : {}),
+          },
+        }),
     });
 
     ruleTester.run(`${ruleName} with ${parser} parser`, plugin.rules[ruleName], assertions);

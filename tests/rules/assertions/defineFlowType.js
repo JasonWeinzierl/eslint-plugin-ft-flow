@@ -311,7 +311,6 @@ const babelLanguageOptions = {
   parserOptions: {
     babelOptions: {
       plugins: [
-        'babel-plugin-transform-flow-enums',
         '@babel/plugin-syntax-flow',
       ],
     },
